@@ -1,7 +1,0 @@
-Eigenbedarf (Kraftwerk)
-Zur Navigation springenZur Suche springen
-In Kraftwerken aller Art haben die internen Aggregate einen Energiebedarf, den das Kraftwerk zunächst selbst bereitstellen muss. Dieser so genannte Eigenbedarf nimmt von der Klemmenleistung des Generators (= Bruttoleistung) einige Prozent in Anspruch.
-
-Einen großen Anteil am Eigenbedarf in Dampfkraftwerken hat üblicherweise die Speisepumpe. Sie wird entweder von einer eigenen Dampfturbine oder über einen Elektromotor angetrieben. Weitere Posten dieser Art sind die Hauptkühlwasserpumpen. Bei Kohlekraftwerken spielen auch die Antriebe der Kohlemühlen, Frischluft- und Saugzuggebläse, der E-Filter und die zahlreichen Umwälzpumpen der Rauchgasreinigungsanlage eine Rolle.
-
-Der elektrische Eigenbedarf ist je nach Kraftwerkstyp verschieden. Bei Kohlekraftwerken liegt er zwischen 4 % und 10 %, bei Kernkraftwerken zwischen 5 % und 16 %. Dabei sind die kleineren Werte bei größeren Kraftwerken typisch. Kleinere Dieselkraftanlagen haben einen Eigenbedarf von 3 % bis 5 %, größere Dieselkraftanlagen hingegen bis zu 8 %. Wasserkraftwerke und Gasturbinenkraftwerke weisen einen sehr geringen Eigenbedarf von rund 1 % auf – diese Kraftwerke kommen daher unter Umständen ohne eigene Mittelspannungsebene aus. Noch etwas niedriger liegt der Eigenbedarf bei Windkraftanlagen, wo der Eigenbedarf etwa 0,35 bis 0,5 % der produzierten elektrischen Energie ausmacht.[1][2]
