@@ -6,12 +6,15 @@
 <title>...</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+body {font-family: 'Open Sans', sans-serif;}
 th, td {border:1px solid black}
 table {border-collapse:collapse; margin:0.5em 0;}
 
 .firstLineAsHead tr:first-child   { font-weight: bold;}
-caption { font-size:1.5em; text-align:left; font-weight: bold;}
+caption { font-size:1em; text-align:left; font-weight: bold;}
 
+h3 {font-size:1.3em;}
 </style>
 
 </head>
@@ -24,12 +27,13 @@ ini_set('display_errors', true);
 
 require_once 'SimpleXLSX.php';
 $xlsxFile = 'material.xlsx';
-# $xlsxFile = 'simplexlsx/books.xlsx';
-# $xlsx = 'simplexlsx/countries_and_population.xlsx';
 
-$data 	= array();
-$table 	= array();
 
+$data 	= array(); // verwendete Daten
+$table 	= array(); // ausführliche Daten
+$dataA 	= array(); // Assoziativ
+
+// Excel-Datei lesen
 if ( $xlsx = SimpleXLSX::parse($xlsxFile)) {
 
 	// Arbeitsblätter
@@ -65,33 +69,79 @@ if ( $xlsx = SimpleXLSX::parse($xlsxFile)) {
 				$data[$sheetName][$rNr][$i] = $r[ $i ];
 				}
 			}
+		// Datenarray schreiben: Assoziativ
+		$keys = $xlsx->rows( $sheetNr )[2];
 		
+		# print_r($keys);
+		$rNr = 3;
+		foreach ( $xlsx->rows( $sheetNr ) as $r ) {
+			if($r[0] < 2 ) continue; // deaktivierte Zeilen übergehen
+			$dataA[$sheetName][++$rNr] = array();
+			for ( $i = 0; $i < $num_cols; $i ++ ) {	
+				if($selCol[$i] < 2) continue; // deaktivierte Spalten übergehen
+				$dataA[$sheetName][$rNr][$keys[$i]] = $r[ $i ];
+				}
+			}
 		}
 	
-	
 	} else {  echo SimpleXLSX::parseError(); }
+	
 
-echo implode($sheetArr,", ");
+// Assiziatives Array in Variablen für die Berechnung konvertieren
+// treffen mehrere Zeilen der Excel-Datei zu, gewinnt die letzte Zeile
+$vars = Array() ;  // alle eingelesenen Variablen
+foreach($dataA["Daten"] as $dateSet) {
+	$vars[$dateSet['ET']."_".$dateSet['G']]	 = $dateSet['W'];
+	$vars[$dateSet['ET']."_".$dateSet['G']."_E"]	 = $dateSet['E'];
+	echo $dateSet['ET']."_".$dateSet['G'].": ".$dateSet['W']." ".$dateSet['E']."<br>"; 
+    }
+foreach($vars as $k => $v) { $$k = $v;}
 
 
 
 
 
 
-echo getTable("Daten");
+
+// Abkürzungen
+echo getTable("Abkürzungen",0);
+
+/* Anhang */
+echo "<h2>Anhang</h2>";
+echo "EXCEL-Arbeitsblätter: ".implode($sheetArr,", ");
+
+echo "<h3>Als Variablen erzeugt</h3>";
+print_r($vars ); 
+ echo "<br>";
+ echo json_encode ($vars);
+
+echo "<h3>Für Berechnung verwendet</h3>";
+
+echo "<h4>Assoziativ: PHP-Array und json_encode</h4>";
+ print_r($dataA);
+ echo "<br>";
+ echo json_encode ($dataA["Daten"]);
+
+
+echo "<h4>als Tabelle</h4>";
 echo getTable("Daten", 1, "data");
 
-echo getTable("Abkürzungen",0);
+echo "<h4>Num: PHP-Array und json_encode</h4>";
+print_r($data["Daten"]);
+echo "<br>";
+echo json_encode ($data["Daten"]);
+
+
+echo "<h4>Daten ausführlich</h4>";
+echo getTable("Daten");
+
 echo getTable("Quellen");
+/* Ende Anhang*/
 
 
-
-
-
-
-
+// Funktionen
 function getTable($me, $firstLineAsHead = 1, $source = "table") {
-	global ${$source}; 
+	global ${$source}; // Quelle? entsprechend Auswahl in der EXCEL-Datei
 	$a = "\n<table class='$me";
 	if($firstLineAsHead) {$a .= " firstLineAsHead";}
 	$a .= "'><caption>$me</caption>";
