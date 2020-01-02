@@ -7,4 +7,5 @@ Die Excel-Datei wird dopplet gelesen:
 1. für ausführliche, weiterführende, vergleichende Darstellung
 2. für die tatsächlich verwendeten Zahlen
 
-Kleiner Test: https://hk-mp.000webhostapp.com/material-lesen.php
+Test Server
+https://hk-mp.000webhostapp.com/
