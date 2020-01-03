@@ -13,9 +13,9 @@ include('03_SimpleXLSX.php');
 $kWh = 0;
 checkInput() ;
 ?>
-<!-- h1>Me in Your Back Yard</h1 -->
-<h1>&#128119; Baustelle</h1>
-<form method="get" >
+<h1>&#128119; Me in Your Back Yard // Baustelle!</h1>
+<p></p><a href='#abk'>Abkürzungen</a> | <a href='#data_details'>Details</a> | <a href='#ref'>Quellen</a></p>
+<form method="get" action="./">
 <input type="number" name="kWh" id="kWh" placeholder="Dein Verbrauch" min="0"
 value="<?php if($kWh) echo $kWh; ?>"
 
@@ -24,7 +24,12 @@ value="<?php if($kWh) echo $kWh; ?>"
 </form>
 
 <p>z.B. Jahresverbrauch <a href="?kWh=2000">mein Haushalt</a> |
-Jahresproduktion <a href="?kWh=1400000">WKA E40014</a> Nennleistung 500kW<br>
+ø Jahresproduktion <a href="?kWh=1400000">WKA E40014</a> Nennleistung 500kW |
+Windpark ca. 400 NHN in Thüringen 7 x E66  <a href="?kWh=21144581">Ertrag 2019</a> <small>mit teilweiser Abschaltung
+</small></p>
+ 
+
+
 <small>ACHTUNG! Die Berechnung berücksichtigt keinen Strommix, keine Zwischenspeicher, kein Abfackeln. </small></p>
 
 <?php
@@ -47,10 +52,15 @@ echo $E_2BK_ReK_Display;
 echo $E_2BK_CO2_Display;
 echo $E_2BK_KS_Display;
 echo $E_2BK_KSs_Display;
+echo "</div>";
 
+
+/* Atom ... * /
+echo "<div class='tab'>";
+echo "<div>ODER</div>";
 echo $E_2AK_CO2_Display;
 echo $E_2AK_AM_Display;
-
+/**/
 
 echo "</div>";
 
@@ -59,8 +69,11 @@ echo "</div>";
 echo "<div class='tab'>";
 echo "<div>Zum Vergleich</div>";
 echo $E_2W_CO2_Display;
+echo $E_2PV_FB_Display;
 echo "</div>";
-echo "<small>// Verlängerte Laufzeit senkt die graue Energie!</small>";
+echo "<small>// Graue Energie: Herstellung, Transport, Lagerung, Verkauf und Entsorgung.<br>
+Bei Windkraftanlagen entfällt der größte Teil auf die Herstellung (Beton, Eisen, Kunstoff, Kupfer) Eine
+verlängerte Laufzeit senkt deshalb die graue Energie! PV ähnlich ...</small>";
 
 echo "<div class='tab'>";
 echo "<div>Zum Vergleich</div>";
@@ -89,15 +102,16 @@ echo "<hr><pre class='calcMethod'>\$calcMethod Berechnung, Zwischenergebnisse ge
 // Abkürzungen
 echo "<pre>\$varsDisplay Variablen-Anzeige  ".$varsDisplay."</pre>";
 
-
+echo "<a id='abk'>";
 echo getTable("Abkürzungen",0);
 
 
 echo getTable("Daten", 1, "data");
 
-echo "<h4>Daten ausführlich</h4>";
+echo "<h4 id='data_details'>Daten Details</h4>";
 echo getTable("Daten");
 
+echo "<a id='ref'>";
 echo getTable("Quellen");
 /* Ende Anhang*/
 
